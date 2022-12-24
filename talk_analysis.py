@@ -1,3 +1,4 @@
+import os
 import matplotlib
 from datetime import datetime
 import matplotlib.pyplot as plt
@@ -6,21 +7,6 @@ import matplotlib.pyplot as plt
 plt.rcParams['font.sans-serif']=['SimHei']
 plt.rcParams['font.family']='sans-serif' 
 plt.rcParams['axes.unicode_minus'] = False
-
-class GUI:
-
-    def window():
-        app = QApplication(sys.argv)
-        widget = QWidget()
-
-        textLabel = QLabel(widget)
-        textLabel.setText("Hello World!")
-        textLabel.move(110, 85)
-
-        widget.setGeometry(50, 50, 320, 200)
-        widget.setWindowTitle("PyQt5 Example")
-        widget.show()
-        sys.exit(app.exec_())
 
 '''
 @input: talk sentence.txt
@@ -148,6 +134,36 @@ class Sentance_parser:
 
         return count_zh
 
+    def generate_pie_fig(self, 
+                save_path: str,
+                figure_name: str,
+                attr_list: list,
+                value_list: list):
+        
+        if not os.path.isdir(save_path):
+            os.mkdir(save_path)
+
+        plt.cla()
+        plt.figure(figsize=(6,9)) 
+
+        # separeted = (0, 0, 0, 0.3, 0.3, 0,0)    # 依據類別數量，分別設定要突出的區塊
+        plt.pie(value_list, 
+                autopct = "%1.1f%%", 
+                # explode = separeted,            # 設定分隔的區塊位置
+                labels = attr_list,
+                startangle = 90, 
+                pctdistance=0.9,
+                textprops = {"fontsize" : 12}, 
+                shadow=True)
+
+        plt.axis('equal')                          # 使圓餅圖比例相等
+        plt.title(figure_name, {"fontsize" : 18})  # 設定標題及其文字大
+        plt.legend(loc="best")
+        plt.savefig(f'{save_path}/{figure_name}',
+                    bbox_inches='tight',           # 去除座標軸占用的空間
+                    pad_inches=0.0)                # 去除所有白邊)
+        
+
 if __name__ == '__main__':
 
     dataset_path = './dataset.txt'
@@ -158,45 +174,13 @@ if __name__ == '__main__':
     with Sentance_parser(dataset_path) as sp:
         talk_data = sp.parse()
         x, y = sp.user_sentence_count(talk_data)
+        sp.generate_pie_fig(save_path='./figure', 
+                            figure_name='sentence_count', 
+                            attr_list=x, 
+                            value_list=y)
 
-        
-        # separeted = (0, 0, 0, 0.3, 0.3, 0,0)                  # 依據類別數量，分別設定要突出的區塊
-        plt.pie(y, 
-                autopct = "%1.1f%%", 
-                # explode = separeted,            # 設定分隔的區塊位置
-                labels = x,
-                startangle = 90, 
-                pctdistance=0.9,
-                textprops = {"fontsize" : 12}, 
-                shadow=True)
-
-        plt.axis('equal')                                          # 使圓餅圖比例相等
-        plt.title("Sentence Count", {"fontsize" : 18})  # 設定標題及其文字大
-        plt.legend(loc="best")
-        plt.savefig('sentance_count.png',
-                    bbox_inches='tight',               # 去除座標軸占用的空間
-                    pad_inches=0.0)                    # 去除所有白邊)
-        
-####################################
-
-        
-        plt.figure(figsize=(6,9)) 
-
-        plt.cla()
         x, y = sp.user_word_count(talk_data)
-        # separeted = (0, 0, 0, 0.3, 0.3, 0,0)                  # 依據類別數量，分別設定要突出的區塊
-        plt.pie(y, 
-                autopct = "%1.1f%%", 
-                # explode = separeted,            # 設定分隔的區塊位置
-                labels = x,
-                startangle = 90, 
-                pctdistance=0.9,
-                textprops = {"fontsize" : 12}, 
-                shadow=True)
-
-        plt.axis('equal')                                          # 使圓餅圖比例相等
-        plt.title("Word Count", {"fontsize" : 18})  # 設定標題及其文字大
-        plt.legend(loc="best")
-        plt.savefig('word_count.png',
-                    bbox_inches='tight',               # 去除座標軸占用的空間
-                    pad_inches=0.0)                    # 去除所有白邊)
+        sp.generate_pie_fig(save_path='./figure', 
+                            figure_name='word_count', 
+                            attr_list=x, 
+                            value_list=y)
