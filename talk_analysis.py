@@ -20,6 +20,19 @@ class Sentance_parser:
     def __init__(self, path: str):
         self.path = path
 
+
+    def __enter__(self):
+        print('Start!!')
+        return self
+
+    def __exit__(self, exec_type, exc_value, tb):
+        if exec_type:
+            print('exec_type: ', exec_type)
+            print('exec_value: ', exc_value)
+            print('tb: ', tb)
+        else:
+            print('Done')
+
     def validate_date(self, date: str):
         try:
             datetime.strptime(date, '%Y/%m/%d')
@@ -33,18 +46,6 @@ class Sentance_parser:
             return True
         except ValueError:
             return False
-
-    def __enter__(self):
-        print('Start!!')
-        return self
-
-    def __exit__(self, exec_type, exc_value, tb):
-        if exec_type:
-            print('exec_type: ', exec_type)
-            print('exec_value: ', exc_value)
-            print('tb: ', tb)
-        else:
-            print('Done')
 
     def parse(self):
     
