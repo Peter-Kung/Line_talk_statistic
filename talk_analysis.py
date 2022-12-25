@@ -1,4 +1,5 @@
 import os, re
+from tqdm import tqdm
 import numpy as np
 import pandas as pd
 import matplotlib
@@ -69,7 +70,6 @@ class Sentance_parser:
         with open(self.path) as f:
             for line in f.readlines():
                 s = line.split('	')
-
                 
                 date_str = s[0][:10]
                 time_str = s[0]
@@ -114,6 +114,12 @@ class Sentance_parser:
 
         user_dict = {}
 
+        # Get the total number of conversations
+        total_conversations = sum(len(conversation_list) for conversation_list in talk_data.values())
+
+        # Initialize the progress bar
+        pbar = tqdm(total=total_conversations)
+
         for date, conversation_list in talk_data.items():
             for dictionary in conversation_list:
                 for username in dictionary.keys():    
@@ -121,6 +127,11 @@ class Sentance_parser:
                         user_dict[username] += 1
                     else:
                         user_dict[username] = 1
+                 # Update the progress bar manually
+                pbar.update()
+
+        # Close the progress bar
+        pbar.close()
 
         return user_dict.keys(), user_dict.values()
 
@@ -132,6 +143,12 @@ class Sentance_parser:
 
         user_dict = {}
 
+        # Get the total number of conversations
+        total_conversations = sum(len(conversation_list) for conversation_list in talk_data.values())
+
+        # Initialize the progress bar
+        pbar = tqdm(total=total_conversations)
+
         for date, conversation_list in talk_data.items():
             for dictionary in conversation_list:
                 for username, context in dictionary.items():    
@@ -142,6 +159,12 @@ class Sentance_parser:
                         user_dict[username] += word_count
                     else:
                         user_dict[username] = word_count
+
+                # Update the progress bar manually
+                pbar.update()
+
+        # Close the progress bar
+        pbar.close()
                     
         return user_dict.keys(), user_dict.values()
 
@@ -165,6 +188,12 @@ class Sentance_parser:
 
         user_sentence_sentiments_grade_dict = {}
 
+         # Get the total number of conversations
+        total_conversations = sum(len(conversation_list) for conversation_list in talk_data.values())
+
+        # Initialize the progress bar
+        pbar = tqdm(total=total_conversations)
+
         for date, conversation_list in talk_data.items():
             for dictionary in conversation_list:
                 for username, sentence in dictionary.items():    
@@ -173,6 +202,12 @@ class Sentance_parser:
                     else:
                         user_sentence_sentiments_grade_dict[username] = [self.do_sentiment_analyze(sentence)]
 
+                 # Update the progress bar manually
+                pbar.update()
+
+        # Close the progress bar
+        pbar.close()
+        
         return user_sentence_sentiments_grade_dict
 
     def generate_pie_fig(self, 
@@ -232,7 +267,7 @@ class Sentance_parser:
 
 if __name__ == '__main__':
 
-    dataset_path = './dataset2.txt'
+    dataset_path = './dataset.txt'
 
     with Sentance_parser(dataset_path) as sp:
         talk_data = sp.parse()
