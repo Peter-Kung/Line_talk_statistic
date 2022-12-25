@@ -1,4 +1,4 @@
-import os
+import os, re
 import numpy as np
 import pandas as pd
 import matplotlib
@@ -77,7 +77,9 @@ class Sentance_parser:
                     date_dict[date_str] = []
                     current_date = date_str
                 elif self.validate_time(time_str):
-                    username = s[1]
+                    # 匹配不是中文、大小写、数字的其他字符
+                    cop =  re.compile("[^\u4e00-\u9fa5^a-z^A-Z^0-9]")
+                    username = cop.sub('', s[1])
                     sentance = s[2]
                     date_dict[current_date].append({username: sentance})
 
@@ -126,7 +128,6 @@ class Sentance_parser:
     @input: conversation
     @output: user and speak context per each user
     '''
-
     def user_word_count(self, talk_data):
 
         user_dict = {}
@@ -184,7 +185,7 @@ class Sentance_parser:
             os.mkdir(save_path)
 
         plt.cla()
-        plt.figure(figsize=(6,9)) 
+        # plt.figure(figsize=(6,9)) 
 
         # separeted = (0, 0, 0, 0.3, 0.3, 0,0)    # 依據類別數量，分別設定要突出的區塊
         plt.pie(value_list, 
@@ -196,9 +197,9 @@ class Sentance_parser:
                 textprops = {"fontsize" : 12}, 
                 shadow=True)
 
-        
+        plt.tight_layout()
         plt.title(figure_name, {"fontsize" : 18})  # 設定標題及其文字大
-        plt.legend(loc="best")
+        # plt.legend(loc="best")
         plt.savefig(f'{save_path}/{figure_name}',
                     bbox_inches='tight',           # 去除座標軸占用的空間
                     pad_inches=0.0)                # 去除所有白邊
@@ -219,6 +220,8 @@ class Sentance_parser:
         
         # clean previous canvus
         plt.cla()
+        
+        plt.tight_layout()
         # draw
         sns.boxplot(data=df)
         plt.title(figure_name, {"fontsize" : 18})  # 設定標題及其文字大
@@ -229,10 +232,7 @@ class Sentance_parser:
 
 if __name__ == '__main__':
 
-    dataset_path = './dataset.txt'
-
-    # plt.figure(figsize=(5, 6.5))    
-    plt.figure(figsize=(6,9)) 
+    dataset_path = './dataset2.txt'
 
     with Sentance_parser(dataset_path) as sp:
         talk_data = sp.parse()
