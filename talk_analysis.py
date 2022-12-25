@@ -207,7 +207,7 @@ class Sentance_parser:
 
         # Close the progress bar
         pbar.close()
-        
+
         return user_sentence_sentiments_grade_dict
 
     def generate_pie_fig(self, 
@@ -244,6 +244,9 @@ class Sentance_parser:
                         figure_name: str,
                         talk_data: {}):
         
+        if not os.path.isdir(save_path):
+            os.mkdir(save_path)
+
         '''
         - data framelize dictionary
         - remark:
