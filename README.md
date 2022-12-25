@@ -36,6 +36,6 @@ https://www.twblogs.net/a/5d70dbebbd9eee541c33feb9
 
 [ICT-Python-101](https://github.com/willismax/ICT-Python-101/blob/master/13.Python%E8%B3%87%E6%96%99%E5%88%86%E6%9E%90%E6%87%89%E7%94%A8-%E8%AA%9E%E6%84%8F%E5%88%86%E6%9E%90%E7%AF%87NLP.ipynb)
 
-[tqdm](https://clay-atlas.com/blog/2019/11/11/python-chinese-tutorial-tqdm-progress-and-ourself/)
+[tqdm](https://blog.csdn.net/qq_40666028/article/details/79335961)
 
 [ChatGPT](https://openai.com/blog/chatgpt/)
