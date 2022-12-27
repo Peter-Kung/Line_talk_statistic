@@ -29,7 +29,9 @@ Here is the table of sentiment grade level:
 
 ## Remark
 If you need chineese word in your graph, please follow this article:
+
 [word font](http://www.font5.com.cn/font_download.php?id=151&part=1237887120)
+
 [Setting](https://andy6804tw.github.io/2022/06/17/colab-plt-chinese/)
 
 ## Reference
