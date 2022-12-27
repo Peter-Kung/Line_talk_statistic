@@ -1,8 +1,8 @@
 # Line Talk Statistic
 
 ## Prerequisites
-- Donwload chat content in txt file from LINE chat room
-- Chatting context could be downloaded via setting view in chat room
+- Donwload chat content in txt file from LINE chat room.
+- Chatting context could be downloaded via setting view in chat room.
 
 ## User Guide
 - Prepare the chat record in line with txt file format.
@@ -10,12 +10,12 @@
 - The program could generate chart about room information each user.
 
 ## Features
-- Compare speak ratio in the chat room
-- Compare word of speak ratio in the chat room
-- Compare setiment grade for each user in the chat room
+- Compare speak ratio in the chat room.
+- Compare word of speak ratio in the chat room.
+- Compare setiment grade for each user in the chat room.
 
 ## Setiment Analysis
-In this feature,  class `Sentance_parser` use snowNLP package, and use `sentiments()` to determine each sentence's setiment grade. In the end, class `Sentance_parser` sum up all grades and plot box graph, providing graph data could be analyzed by user.
+In this feature,  class `Sentance_parser` use snowNLP package, and use `sentiments()` to determine each sentence's setiment grade. In the end, class `Sentance_parser` assemble all grades into a list and plot box graph, providing graph data could be analyzed by user.
 
 Here is the table of sentiment grade level:
 

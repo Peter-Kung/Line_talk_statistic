@@ -235,7 +235,7 @@ class Sentance_parser:
 
 if __name__ == '__main__':
 
-    dataset_path = './dataset2.txt'
+    dataset_path = './dataset3.txt'
 
     with Sentance_parser(dataset_path) as sp:
         talk_data = sp.parse()
