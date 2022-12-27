@@ -15,7 +15,7 @@
 - Compare setiment grade for each user in the chat room.
 
 ## Setiment Analysis
-In this feature,  class `Sentance_parser` use snowNLP package, and use `sentiments()` to determine each sentence's setiment grade. In the end, class `Sentance_parser` assemble all grades into a list and plot box graph, providing graph data could be analyzed by user.
+In this feature,  class `Sentance_parser` use snowNLP package, and use `sentiments()` to determine each sentence's setiment grade. In the end, class `Sentance_parser` assembles all grades into a list and plot box graph, providing graph data could be analyzed by user.
 
 Here is the table of sentiment grade level:
 
@@ -29,7 +29,8 @@ Here is the table of sentiment grade level:
 
 ## Remark
 If you need chineese word in your graph, please follow this article:
-https://www.twblogs.net/a/5d70dbebbd9eee541c33feb9
+[word font](http://www.font5.com.cn/font_download.php?id=151&part=1237887120)
+[Setting](https://andy6804tw.github.io/2022/06/17/colab-plt-chinese/)
 
 ## Reference
 [Seaborn](https://ithelp.ithome.com.tw/articles/10234188)

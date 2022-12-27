@@ -2,18 +2,15 @@ import os, re
 from tqdm import tqdm
 import numpy as np
 import pandas as pd
-import matplotlib
 from datetime import datetime
 import matplotlib.pyplot as plt
-from matplotlib.font_manager import FontProperties
-import matplotlib.pyplot as plt
 import seaborn as sns
-
+from matplotlib.font_manager import fontManager
+import matplotlib as mpl
 from snownlp import SnowNLP
 
-plt.rcParams['font.sans-serif']=['SimHei']
-plt.rcParams['font.family']='sans-serif' 
-plt.rcParams['axes.unicode_minus'] = False
+fontManager.addfont('./font/simhei.ttf')
+mpl.rc('font', family='simhei')
 
 '''
 @input: talk sentence.txt
@@ -185,8 +182,8 @@ class Sentance_parser:
             os.mkdir(save_path)
 
         plt.cla()
-        # plt.figure(figsize=(6,9)) 
 
+        
         # separeted = (0, 0, 0, 0.3, 0.3, 0,0)    # 依據類別數量，分別設定要突出的區塊
         plt.pie(value_list, 
                 autopct = "%1.1f%%", 
@@ -194,7 +191,7 @@ class Sentance_parser:
                 labels = attr_list,
                 startangle = 90, 
                 pctdistance=0.9,
-                textprops = {"fontsize" : 12}, 
+                textprops = {"fontsize" : 8},
                 shadow=True)
 
         plt.tight_layout()
@@ -227,7 +224,7 @@ class Sentance_parser:
         plt.tight_layout()
         # draw
         sns.boxplot(data=df)
-        plt.title(figure_name, {"fontsize" : 18})  # 設定標題及其文字大
+        plt.title(figure_name, {"fontsize" : 8})  # 設定標題及其文字大
         plt.savefig(f'{save_path}/{figure_name}',
                     bbox_inches='tight',           # 去除座標軸占用的空間
                     pad_inches=0.0)                # 去除所有白邊
